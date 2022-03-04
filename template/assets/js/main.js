@@ -116,7 +116,7 @@ function showVideo(video_path){
     fluid: true,
     controls: true,
     preload: true,
-    autoplay: false
+    autoplay: true
   });
 
   vjs.src({
@@ -145,7 +145,17 @@ function showHTML(html_path){
 };
 
 function changeScene(element){
-  
+  if (!element.classList.contains('active')){
+
+  // remove active element
+  let activeList = document.getElementsByClassName('active')
+    if (activeList.length !== 0){
+    activeList[0].classList.remove('active')
+  }
+
+  // add active class to current element
+  element.classList.add('active')
+
   var trace = [];
   var end = false;
   var node = element
@@ -173,8 +183,49 @@ function changeScene(element){
   }else{
     showHTML(path)
   }
-
+  element.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
+  }
 }
+
+
+
+
+function prevScene() {
+  let active = document.getElementsByClassName('active')[0]
+
+  if (active != undefined){
+    let prevElement = active.previousElementSibling;
+    if (prevElement != null){
+      changeScene(prevElement)
+    }
+  }
+}
+
+function nextScene() {
+  let active = document.getElementsByClassName('active')[0]
+
+  if (active != undefined){
+    let nextElement = active.nextElementSibling;
+    if (nextElement != null){
+      changeScene(nextElement)
+    }
+  }
+}
+
+
+document.onkeypress = function (e) {
+    var evt = window.event || e;
+    switch (evt.keyCode) {
+      case 110:  
+        nextScene();
+        break;
+      case 112:
+        prevScene();
+        break;
+
+    }
+}
+
 
 // showVideo("/tmp/NiceAdmin/1 - Table of Contents.mp4");
 // showHTML("/project/template/1.html")
