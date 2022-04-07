@@ -112,7 +112,7 @@ function showVideo(video_path){
   section.appendChild(container);
 
   let vjs = videojs("course-video", {
-    playbackRates: [0.5, 1, 1.5, 2],
+    playbackRates: [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2],
     fluid: true,
     controls: true,
     preload: true,
