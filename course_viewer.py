@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from ttkbootstrap.dialogs.dialogs import Messagebox, MessageDialog
 from tkinter.filedialog import askdirectory
 from ttkbootstrap.constants import *
@@ -13,9 +15,11 @@ def callback(url):
 
 root = ttk.Window()
 root.title("Course Viewer")
-root.geometry("700x125")
-root.minsize(700, 125)
-root.maxsize(700, 125)
+#root.geometry("700x125")
+#root.minsize(700, 125)
+#root.maxsize(700, 125)
+root.resizable(False, False)
+
 
 folder_path = ttk.StringVar()
 
