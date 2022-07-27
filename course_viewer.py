@@ -25,24 +25,21 @@ folder_path = ttk.StringVar()
 
 def validate_path():
     path = folder_path.get()
-    if not os.path.isabs(path):
+    
+    if path == "":
+        Messagebox.show_error("Directory path cannot be empty.", "Viewer Installer")
+    elif not os.path.isabs(path):
         Messagebox.show_error("Please enter a absolute path. Alternatively use the path picker.", "Viewer Installer")
     elif path != "":
         path = os.path.abspath(path)
-
-
+        
         url = main(path, os.path.abspath(os.path.dirname(__file__)))
         def browser():
             webbrowser.open_new_tab("file://" + url) 
         openin = MessageDialog("Course Viewer installed in parent folder '%s'.\nStart the app by opening 'course-viewer.html' in a modern browser." % os.path.join(path, "course-viewer"), "Viewer Installer", ["Open in Browser:primary"], command=browser)
         openin.show()
-        
-        
-        # Messagebox.show_info("Course Viewer installed in parent folder '%s'.\nStart the app by opening 'viewer.html' in a modern browser." % os.path.join(path, "course-viewer"), "Viewer Installer")
-        
         root.destroy()
-    elif path == "":
-        Messagebox.show_error("Directory path cannot be empty", "Viewer Installer", "Viewer Installer")
+    
     else:
         Messagebox.show_error("An error has occured. Please restart the application.", "Viewer Installer")
 
